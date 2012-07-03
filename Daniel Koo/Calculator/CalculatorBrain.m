@@ -42,6 +42,8 @@
 - (double)performOperation:(NSString *)operation {
     double result = 0;
     
+    // perform the chosen operation, whether it be with the operands
+    // on the stack or otherwise:
     if ([operation isEqualToString:@"+"]) {
         result = [self popOperand] + [self popOperand];
     } else if ([@"*" isEqualToString:operation]) {
@@ -52,6 +54,17 @@
     } else if ([operation isEqualToString:@"/"]) {
         double divisor = [self popOperand];
         if (divisor) result = [self popOperand] / divisor;
+    } else if ([operation isEqualToString:@"sin"]) {
+        result = sin([self popOperand]);
+    } else if ([operation isEqualToString:@"cos"]) {
+        result = cos([self popOperand]);
+    } else if ([operation isEqualToString:@"sqrt"]) {
+        result = sqrt([self popOperand]);
+    } else if ([operation isEqualToString:@"π"]) {
+        result = M_PI;
+    } else if ([operation isEqualToString:@"C"]) {
+        // The Clear button empties the stack
+        [self.operandStack removeAllObjects];
     }
     
     [self pushOperand:result];
