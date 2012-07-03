@@ -25,36 +25,27 @@
 }
 
 - (IBAction)digitPressed:(UIButton *)sender {
- 
-  NSString *digit = [sender currentTitle];
-//    NSLog(@"%@", sender.titleLabel.text);
+    NSString *digit = [sender currentTitle];
     if (userIsInTheMiddleOfEnteringANumber) {
         self.display.text = [self.display.text stringByAppendingString:digit];
     } else {
         self.display.text = digit;
         userIsInTheMiddleOfEnteringANumber = YES;
     }
-    
 }
+
 - (IBAction)enterPressed {
-  //  NSLog(@"Enter pressed");
-    
     [self.brain pushOperand:[self.display.text doubleValue]];
     self.userIsInTheMiddleOfEnteringANumber = NO;
-
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
-//    NSLog(@"%@", sender.titleLabel.text);
-
   if (userIsInTheMiddleOfEnteringANumber) {
       [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
     double result = [self.brain performOperation:operation];
     self.display.text = [NSString stringWithFormat:@"%g", result];
-
-    
 }
 
 @end
