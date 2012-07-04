@@ -28,8 +28,6 @@
 - (void)pushOperand:(double)operand {
     NSNumber *operandObject = [NSNumber numberWithDouble:operand];
     [self.operandStack addObject:operandObject];
-    
-    
 }
 
 - (double)popOperand {
@@ -59,7 +57,10 @@
     } else if ([operation isEqualToString:@"cos"]) {
         result = cos([self popOperand]);
     } else if ([operation isEqualToString:@"sqrt"]) {
-        result = sqrt([self popOperand]);
+        // check for negative inputs
+        double number = [self popOperand];
+        number = number >= 0 ? number: 0;
+        result = sqrt(number);
     } else if ([operation isEqualToString:@"π"]) {
         result = M_PI;
     } else if ([operation isEqualToString:@"C"]) {
