@@ -29,11 +29,18 @@
 
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
-    if (userIsInTheMiddleOfEnteringANumber) {
-        self.display.text = [self.display.text stringByAppendingString:digit];
+    if ([self.display.text isEqualToString:@"0"]) {
+        if (![digit isEqualToString:@"0"]) {
+            self.display.text = digit;
+            userIsInTheMiddleOfEnteringANumber = YES;
+        } 
     } else {
-        self.display.text = digit;
-        userIsInTheMiddleOfEnteringANumber = YES;
+        if (userIsInTheMiddleOfEnteringANumber) {
+            self.display.text = [self.display.text stringByAppendingString:digit];
+        } else {
+            self.display.text = digit;
+            userIsInTheMiddleOfEnteringANumber = YES;
+        }
     }
 }
 
