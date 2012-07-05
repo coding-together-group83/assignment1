@@ -32,14 +32,14 @@
     if ([self.display.text isEqualToString:@"0"]) {
         if (![digit isEqualToString:@"0"]) {
             self.display.text = digit;
-            userIsInTheMiddleOfEnteringANumber = YES;
+            self.userIsInTheMiddleOfEnteringANumber = YES;
         } 
     } else {
-        if (userIsInTheMiddleOfEnteringANumber) {
+        if (self.userIsInTheMiddleOfEnteringANumber) {
             self.display.text = [self.display.text stringByAppendingString:digit];
         } else {
             self.display.text = digit;
-            userIsInTheMiddleOfEnteringANumber = YES;
+            self.userIsInTheMiddleOfEnteringANumber = YES;
         }
     }
 }
@@ -53,7 +53,7 @@
 }
 
 - (IBAction)operationPressed:(UIButton *)sender {
-    if (userIsInTheMiddleOfEnteringANumber) {
+    if (self.userIsInTheMiddleOfEnteringANumber) {
         [self enterPressed];
     }
     NSString *operation = [sender currentTitle];
@@ -81,9 +81,9 @@
         }
     } else {
         self.display.text = @"0.";
-        userIsInTheMiddleOfEnteringANumber = YES;
+        self.userIsInTheMiddleOfEnteringANumber = YES;
     }
-    decimalAlreadyExists = YES;
+    self.decimalAlreadyExists = YES;
 
 }
 
